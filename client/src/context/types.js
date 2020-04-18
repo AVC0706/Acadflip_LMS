@@ -1,0 +1,5 @@
+export const GET_ALLSTUDENTS = "GET_ALLSTUDENTS";
+export const GET_STUDENT = "GET_STUDENT";
+export const STUDENT_ERROR = "STUDENT_ERROR";
+
+// export const GET_STUDENTS = "GET_STUDENTS";
