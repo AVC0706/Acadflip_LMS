@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Ins = require("../../models/Institute");
 const Principal = require("../../models/Principal");
-const config = require("config");
-const jwt = require("jsonwebtoken");
 
 //Register
 router.post("/addInstitute", async (req, res) => {
@@ -26,8 +24,7 @@ router.post("/addInstitute", async (req, res) => {
 
     principal = new Principal({
       institute_id: institute.id,
-      name,
-      iuser,
+      name: iuser,
       email,
       password,
     });

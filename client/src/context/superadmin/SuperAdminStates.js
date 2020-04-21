@@ -12,11 +12,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
-  CONTACT_ERROR,
-  GET_STUDENT,
-  GET_ALLSTUDENTS,
-  STUDENT_ERROR,
-} from "../../types";
+  INSTITUTE_SUCCESS,
+} from "../types";
 import setAuthToken from "../../utils/setAuthToken";
 import ContextDevTool from "react-context-devtool";
 
@@ -29,6 +26,7 @@ const SuperAdminState = (props) => {
     error: null,
     isAdmin: false,
     msg: "",
+    isInst: null,
   };
 
   const [state, dispatch] = useReducer(SuperAdminReducer, initialState);
@@ -42,18 +40,18 @@ const SuperAdminState = (props) => {
 
     try {
       const res = await axios.get("/api/auth/superAdmin");
-
+      console.log(res.data);
       dispatch({
         type: USER_LOADED,
         payload: res.data,
       });
       console.log("user loaded...");
     } catch (e) {
+      console.log(e);
       dispatch({
         type: AUTH_ERROR,
         payload: e.response.data.msg,
       });
-      console.log("error");
     }
   };
 
@@ -87,11 +85,7 @@ const SuperAdminState = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        "/api/institute/addInstitute",
-        formData,
-        config
-      );
+      const res = await axios.post("/api/admin/adminR", formData, config);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -114,9 +108,9 @@ const SuperAdminState = (props) => {
         "Content-Type": "application/json",
       },
     };
-
     try {
       const res = await axios.post("/api/auth", formData, config);
+      // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
         type: LOGIN_SUCCESS,
@@ -129,11 +123,41 @@ const SuperAdminState = (props) => {
         type: LOGIN_FAIL,
         payload: e.response.data.msg,
       });
+      console.log("login fail");
     }
   };
 
   //Logout
   const logout = () => dispatch({ type: LOGOUT });
+
+  //Add institute
+  const add = async (formData) => {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "/api/institute/addInstitute",
+        formData,
+        config
+      );
+
+      dispatch({
+        type: INSTITUTE_SUCCESS,
+        payload: res.data,
+      });
+      console.log("institute successfully added");
+    } catch (e) {
+      // dispatch({
+      //   type: REGISTER_FAIL,
+      //   payload: e.response.data.msg,
+      // });
+      console.log("Institute adding fail");
+    }
+  };
 
   //Clear Error
   const clearError = () => {
@@ -151,18 +175,19 @@ const SuperAdminState = (props) => {
         isAuth: state.isAuth,
         isAdmin: state.isAdmin,
         error: state.error,
-
+        isInst: state.isInst,
         register,
         login,
         loadUser,
         logout,
         clearError,
+        add,
       }}
     >
       <ContextDevTool
-        context={AuthContext}
-        id='uniqContextId'
-        displayName='Context Display Name'
+        context={SuperAdminContext}
+        id="uniqContextId"
+        displayName="Context Display Name"
       />
       {props.children}
     </SuperAdminContext.Provider>

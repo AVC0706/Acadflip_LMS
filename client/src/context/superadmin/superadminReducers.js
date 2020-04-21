@@ -7,17 +7,19 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
-} from "../../types";
+  INSTITUTE_SUCCESS,
+} from "../types";
 
 export default (state, action) => {
   switch (action.type) {
     case USER_LOADED:
       return {
         ...state,
+        // ...action.payload,
         isAuth: true,
         loading: false,
         isAdmin: action.payload.user.admin,
-        user: action.payload.user,
+        user: action.payload.superadmin,
       };
 
     case LOGIN_SUCCESS:
@@ -27,7 +29,7 @@ export default (state, action) => {
         ...action.payload,
         loading: false,
         isAuth: true,
-        isAdmin: action.payload.user.admin,
+        isAdmin: action.payload.superadmin.admin,
       };
 
     case LOGIN_FAIL:
@@ -60,6 +62,7 @@ export default (state, action) => {
         ...state,
         ...action.payload,
         loading: false,
+        isAuth: true,
       };
     case REGISTER_FAIL:
       return {
@@ -72,11 +75,19 @@ export default (state, action) => {
         error: action.payload,
       };
 
-    case REGISTER_FAIL:
+    // case REGISTER_FAIL:
+    //   return {
+    //     ...state,
+    //     error: null,
+    //   };
+
+    case INSTITUTE_SUCCESS:
       return {
         ...state,
-        error: null,
+        // ...action.payload,
+        isInst: true,
       };
+
     case CLEAR_ERRORS:
       return {
         error: null,

@@ -7,44 +7,32 @@ import {
   Col,
   Card,
   CardBody,
-  CardImg,
   Spinner,
 } from "reactstrap";
-import src1 from "../../assets/register.svg";
 import SuperAdminContext from "../../context/superadmin/superadminContext";
 import SideNavigation from "./sideNavigation";
 
-const RegisterPage = (props) => {
-  //start
-
+const AddInstitute = (props) => {
   const superadminContext = useContext(SuperAdminContext);
 
-  const {
-    isAuth,
-    isAdmin,
-    error,
-    register,
-    clearError,
-    msg,
-    token,
-  } = superadminContext;
+  const { error, add, clearError, isInst } = superadminContext;
   const [user, setuser] = useState({
     name: "",
+    iuser: "",
     email: "",
     password: "",
   });
 
   const [loading, setLoading] = useState(false);
+  superadminContext.isAuth = useState(true);
 
-  const { name, email, password } = user;
+  const { name, iuser, email, password } = user;
 
   useEffect(() => {
-    if (isAuth) {
-      // console.log("is admin" + isAdmin);
-      // if (isAdmin) {
-      // alert("LOGGED IN");
+    if (isInst) {
       setLoading(false);
-      props.history.push("/superAdminlogin");
+      alert("INSTITUTE ADDED");
+      props.history.push("/superAdmindashboard");
     }
 
     if (error) {
@@ -53,9 +41,9 @@ const RegisterPage = (props) => {
       props.history.push("/superAdminRegister");
     }
 
-    // console.log(msg);
+    console.log(isInst);
     clearError();
-  }, [error, props.history, loading, token]);
+  }, [error, isInst, loading]);
 
   const onChange = (e) => {
     setuser({
@@ -68,11 +56,11 @@ const RegisterPage = (props) => {
     e.preventDefault();
     setLoading(true);
 
-    if (name === "" || email === "" || password === "") {
-      // setAlert("Please enter all fields", "danger");
+    if (name === "" || iuser === "" || email === "" || password === "") {
     } else {
-      register({
+      add({
         name,
+        iuser,
         email,
         password,
       });
@@ -95,14 +83,14 @@ const RegisterPage = (props) => {
           <Card className="loginCard">
             <Row className="justify-content-center align-middle">
               <Col md="4" className="">
-                <CardImg className="img-fluid" src={src1} />
+                {/* <CardImg className="img-fluid" src={src1} /> */}
               </Col>
               <Col md="2" className="mb-5"></Col>
               <Col md="4" className="mb-5 loginData text-center">
                 <CardBody>
                   <form onSubmit={onSubmit}>
                     <h2>
-                      <b>Super Admin Registration</b>
+                      <b>Add Institute</b>
                     </h2>
                     <br />
                     <FormGroup>
@@ -116,7 +104,16 @@ const RegisterPage = (props) => {
                         required
                       />
                     </FormGroup>
-
+                    <FormGroup>
+                      <Input
+                        type="text"
+                        name="iuser"
+                        value={undefined}
+                        placeholder="user"
+                        onChange={onChange}
+                        required
+                      />
+                    </FormGroup>
                     <FormGroup>
                       <Input
                         type="email"
@@ -150,4 +147,4 @@ const RegisterPage = (props) => {
     );
   }
 };
-export default RegisterPage;
+export default AddInstitute;

@@ -14,17 +14,17 @@ router.post("/adminR", async (req, res) => {
     if (user) {
       return res.status(400).json({ msg: "User Already Exists" });
     }
-    user = new User({
+    superadmin = new SuperAdmin({
       name,
       email,
       password,
     });
 
-    await user.save();
+    await superadmin.save();
 
     const payload = {
-      user: {
-        id: user.id,
+      superadmin: {
+        id: superadmin.id,
       },
     };
 
