@@ -24,26 +24,26 @@ const StudentSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  instituteID: {
+  institute_id: {
     type: mongoose.Schema.Types.ObjectId,
     // ref:"superadmin"
   },
-  branchID: {
+  branch_id: {
     type: mongoose.Schema.Types.ObjectId,
     // ref:"branch"
   },
-  semesterID: {
+  semester_id: {
     type: mongoose.Schema.Types.ObjectId,
     // ref:"semester"
   },
-  isActive: {
+  is_active: {
     type: Boolean,
     default: true,
   },
   status: {
     type: String,
   },
-  deviceID: {
+  device_id: {
     type: String,
   },
   deviceType: {

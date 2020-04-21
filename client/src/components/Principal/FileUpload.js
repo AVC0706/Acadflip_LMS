@@ -24,7 +24,7 @@ const FileUpload = (props) => {
       // formData.append("instituteID", principal.instituteID);
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/principal/bulkStudentUpload",
+          "/api/principal/bulkStudentUpload",
           formData,
           {
             headers: {
