@@ -41,7 +41,6 @@ const AddInstitute = (props) => {
       props.history.push("/superAdminRegister");
     }
 
-    console.log(isInst);
     clearError();
   }, [error, isInst, loading]);
 

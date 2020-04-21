@@ -25,6 +25,9 @@ const DashboardPage = (props) => {
       loadUser();
     }
 
+    if (isAuth === false || isAuth === null) {
+      props.history.push("/superAdminlogin");
+    }
     // clearError();
     // eslint-disable-next-line
   }, []);
