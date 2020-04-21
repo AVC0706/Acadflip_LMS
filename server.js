@@ -19,8 +19,9 @@ app.use(cors());
 
 //Defined Routes
 app.use("/api/principal", require("./routes/principal/principal"));
-// app.use("/api/auth, require("./routes/auth"));
-// app.use("/api/paper", require("./routes/paper"));
+app.use("/api/admin", require("./routes/superAdmin/register"));
+app.use("/api/auth", require("./routes/superAdmin/auth"));
+app.use("/api/institute", require("./routes/superAdmin/registerInstitute"));
 
 // Serve static assets in production
 // if (process.env.NODE_ENV === "production") {
