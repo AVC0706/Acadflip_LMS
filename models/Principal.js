@@ -6,7 +6,6 @@ const PrincipalSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-
   name: {
     type: String,
     required: true,

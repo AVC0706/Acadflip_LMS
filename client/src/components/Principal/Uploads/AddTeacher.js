@@ -90,9 +90,6 @@ const PLoginPage = (props) => {
         <div className='container-fluid'>
           <Card className='loginCard'>
             <Row className='justify-content-center align-middle'>
-              <Col md='4' className=''>
-                <CardImg className='img-fluid' src={src1} />
-              </Col>
               <Col md='2' className='mb-5'></Col>
               <Col md='4' className='mb-5 loginData text-center'>
                 <CardBody>
@@ -104,6 +101,17 @@ const PLoginPage = (props) => {
                     <FormGroup>
                       <Input
                         autoFocus
+                        type='text'
+                        name='name'
+                        value={email}
+                        placeholder='Name'
+                        onChange={onChange}
+                        required
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input
+                        autoFocus
                         type='email'
                         name='email'
                         value={email}
@@ -112,6 +120,7 @@ const PLoginPage = (props) => {
                         required
                       />
                     </FormGroup>
+
                     <FormGroup>
                       <Input
                         type='password'

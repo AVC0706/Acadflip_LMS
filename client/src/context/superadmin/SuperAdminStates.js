@@ -15,7 +15,7 @@ import {
   INSTITUTE_SUCCESS,
 } from "../types";
 import setAuthToken from "../../utils/setAuthToken";
-import ContextDevTool from "react-context-devtool";
+// import ContextDevTool from "react-context-devtool";
 
 const SuperAdminState = (props) => {
   const initialState = {
@@ -184,11 +184,11 @@ const SuperAdminState = (props) => {
         add,
       }}
     >
-      <ContextDevTool
+      {/* <ContextDevTool
         context={SuperAdminContext}
         id="uniqContextId"
         displayName="Context Display Name"
-      />
+      /> */}
       {props.children}
     </SuperAdminContext.Provider>
   );
