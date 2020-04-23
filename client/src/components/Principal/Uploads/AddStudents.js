@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from "react";
-import Message from "./Message";
-import Progress from "./Progress";
+import Message from "../Message";
+import Progress from "../Progress";
 import axios from "axios";
+import SideNavigation from "../sideNavigation";
 
-const FileUpload = (props) => {
+const AddStudents = (props) => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
   const [uploadedFile, setUploadedFile] = useState({});
@@ -60,6 +61,8 @@ const FileUpload = (props) => {
 
   return (
     <Fragment>
+      <SideNavigation></SideNavigation>
+
       <br />
       <br />
       <h1>UPLOAD STUDENT DATA</h1>
@@ -99,4 +102,4 @@ const FileUpload = (props) => {
   );
 };
 
-export default FileUpload;
+export default AddStudents;

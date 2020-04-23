@@ -11,10 +11,13 @@ import {
   button,
 } from "reactstrap";
 import src1 from "../../assets/img-1.jpg";
+import SideNavigation from "./sideNavigation";
 
 const ProfilePage = () => {
   return (
     <React.Fragment>
+      <SideNavigation></SideNavigation>
+
       <Row className='justify-content-center'>
         <Col sm='12' md='6' lg='3' className='mb-5 p-5'>
           <Card>

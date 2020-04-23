@@ -12,10 +12,13 @@ import {
   Button,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import SideNavigation from "./sideNavigation";
 
 const DashboardPage = () => {
   return (
     <React.Fragment>
+      <SideNavigation></SideNavigation>
+
       <Row className='justify-content-center'>
         <Col md='6' lg='9'>
           <section className='text-center pb-3'>
@@ -24,14 +27,14 @@ const DashboardPage = () => {
                 <Card className='d-flex mb-5 p-5'>
                   <CardBody>
                     <CardTitle className='font-bold mb-3'>
-                      <strong>Upload Student Data</strong>
+                      <strong>Add Branches</strong>
                     </CardTitle>
                     <CardText></CardText>
                     <br />
                     <br />
                     <span className='right'>
-                      <Link to='/studentCsvUpload' className='p-2'>
-                        <Button color='primary'>ADD STUDENTS</Button>{" "}
+                      <Link to='/principaladdBranch' className='p-2'>
+                        <Button color='primary'>ADD Branch</Button>{" "}
                       </Link>
                     </span>
                   </CardBody>
@@ -41,14 +44,14 @@ const DashboardPage = () => {
                 <Card className='d-flex mb-5 p-5'>
                   <CardBody>
                     <CardTitle className='font-bold mb-3'>
-                      <strong>Upload Model Answer Paper </strong>
+                      <strong>Add Semester </strong>
                     </CardTitle>
                     <CardText></CardText>
                     <br />
                     <br />
                     <span className='right'>
-                      <Link to='/uploadModel' className='p-2'>
-                        <Button color='primary'>UPLOAD MODEL ANSWERS</Button>{" "}
+                      <Link to='principaladdSemester' className='p-2'>
+                        <Button color='primary'>ADD SEMESTER</Button>{" "}
                       </Link>
                     </span>
                   </CardBody>
@@ -60,14 +63,14 @@ const DashboardPage = () => {
                 <Card className='d-flex mb-5 p-5'>
                   <CardBody>
                     <CardTitle className='font-bold mb-3'>
-                      <strong>Upload Student Answer Papers</strong>
+                      <strong>ADD Subject</strong>
                     </CardTitle>
                     <CardText></CardText>
                     <br />
                     <br />
                     <span className='right'>
                       <Link to='/' className='p-2'>
-                        <Button color='primary'>UPLOAD ANSWERS PDF</Button>{" "}
+                        <Button color='primary'>ADD SUBJECT</Button>{" "}
                       </Link>
                     </span>
                   </CardBody>
