@@ -14,6 +14,8 @@ import {
   ADDBRANCH_SUCCESS,
   GETALLBRANCH_SUCCESS,
   GETALLSEMESTER_SUCCESS,
+  GETALLSUBJECT_SUCCESS,
+  GETALLTEACHER_SUCCESS,
   BRANCH_FAIL,
 } from "../types";
 import setAuthToken from "../../utils/setAuthToken";
@@ -28,7 +30,8 @@ const PrincipalState = (props) => {
     isPrincipal: false,
     allbranches: [],
     allsemesters: [],
-
+    allsubjects: [],
+    allteachers: [],
     msg: "",
   };
 
@@ -148,6 +151,42 @@ const PrincipalState = (props) => {
     }
   };
 
+  //-----------Get All Subjects---------------
+  const getAllSubject = async () => {
+    try {
+      const res = await axios.get("/api/principalSubject/getAllSubject");
+
+      dispatch({
+        type: GETALLSUBJECT_SUCCESS,
+        payload: res.data,
+      });
+      console.log(state.allsubjects);
+    } catch (e) {
+      dispatch({
+        type: BRANCH_FAIL,
+        payload: e.response.data.msg,
+      });
+    }
+  };
+
+  //-----------Get All Teachers---------------
+  const getAllTeacher = async () => {
+    try {
+      const res = await axios.get("/api/principalTeacher/getAllTeacher");
+
+      dispatch({
+        type: GETALLTEACHER_SUCCESS,
+        payload: res.data,
+      });
+      console.log(state.allteachers);
+    } catch (e) {
+      dispatch({
+        type: BRANCH_FAIL,
+        payload: e.response.data.msg,
+      });
+    }
+  };
+
   //Clear Error
   const clearError = () => {
     dispatch({
@@ -166,6 +205,8 @@ const PrincipalState = (props) => {
         error: state.error,
         allbranches: state.allbranches,
         allsemesters: state.allsemesters,
+        allsubjects: state.allsubjects,
+        allteachers: state.allteachers,
         login,
         loadUser,
         logout,
@@ -173,6 +214,8 @@ const PrincipalState = (props) => {
         addBranch,
         getAllBranches,
         getAllSemester,
+        getAllSubject,
+        getAllTeacher,
       }}
     >
       {/* <ContextDevTool

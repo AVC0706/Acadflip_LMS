@@ -35,9 +35,9 @@ router.post("/addSubject", [isPrincipal], async (req, res) => {
 });
 
 //-----------Get All Subject---------------
-router.get("/getAllBranch", [isPrincipal], async (req, res) => {
+router.get("/getAllSubject", [isPrincipal], async (req, res) => {
   //start
-  console.log("get All brnahces");
+  console.log("get All subject");
 
   try {
     let subject = await Subject.find({ institute_id: req.user.institute_id });

@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 const Teacher = require("./teacher");
 
 const TeacherAssignSchema = mongoose.Schema({
+  institute_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
   teacher_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
