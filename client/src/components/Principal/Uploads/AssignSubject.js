@@ -14,36 +14,35 @@ import SideNavigation from "../sideNavigation";
 import PrincipalContext from "../../../context/principal/principalContext";
 import axios from "axios";
 
-const AddSubject = (props) => {
+const AssignSubject = (props) => {
   //start
 
   const principalContext = useContext(PrincipalContext);
 
   const {
     error,
-    allbranches,
-    allsemesters,
+    allsubjects,
+    allteachers,
     clearError,
     user,
-    getAllBranches,
-    getAllSemester,
+    getAllTeacher,
+    getAllSubject,
   } = principalContext;
   const [subject, setSubject] = useState({
-    name: "",
-    code: "",
-    branch_id: "",
-    semester_id: "",
+    teacher_id: "",
+    subject_id: "",
+    desc: "",
   });
 
   const [loading, setLoading] = useState(false);
 
-  const { name, code, branch_id, semester_id } = subject;
+  const { desc, subject_id, teacher_id } = subject;
 
   useEffect(() => {
-    getAllBranches();
-    console.log(allbranches);
-    getAllSemester();
-    console.log(allsemesters);
+    getAllTeacher();
+    console.log(allteachers);
+    getAllSubject();
+    console.log(allsubjects);
     clearError();
     // eslint-disable-next-line
   }, []);
@@ -62,13 +61,12 @@ const AddSubject = (props) => {
 
     try {
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("code", code);
-      formData.append("branch_id", branch_id);
-      formData.append("semester_id", semester_id);
+      formData.append("desc", desc);
+      formData.append("teacher_id", teacher_id);
+      formData.append("subject_id", subject_id);
 
       const res = await axios.post(
-        "/api/principalSubject/addSubject",
+        "/api/principalTeacher/assignSubject",
         formData,
         {
           headers: {
@@ -77,10 +75,11 @@ const AddSubject = (props) => {
         }
       );
 
-      alert("Subject Uploaded");
+      alert("Subject Assigned");
       setLoading(false);
     } catch (err) {
       alert(err.response.data.msg);
+      setLoading(false);
     }
   };
   if (loading) {
@@ -109,17 +108,17 @@ const AddSubject = (props) => {
 
                     <FormGroup>
                       <select
-                        value={branch_id}
+                        value={teacher_id}
                         type='select'
-                        name='branch_id'
+                        name='teacher_id'
                         onChange={onChange}
                         required
                       >
-                        <option>----SELECT BRANCH----</option>
-                        {allbranches &&
-                          allbranches.map((branch) => (
-                            <option key={branch._id} value={branch._id}>
-                              {branch.name}
+                        <option>----SELECT TEACHER----</option>
+                        {allteachers &&
+                          allteachers.map((teacher) => (
+                            <option key={teacher._id} value={teacher._id}>
+                              {teacher.name}
                             </option>
                           ))}
                       </select>
@@ -127,48 +126,35 @@ const AddSubject = (props) => {
 
                     <FormGroup>
                       <select
-                        value={semester_id}
+                        value={subject_id}
                         type='select'
-                        name='semester_id'
+                        name='subject_id'
                         onChange={onChange}
                         required
                       >
-                        <option>----SELECT SEMESTER----</option>
-                        {allsemesters &&
-                          allsemesters.map((sem) => (
-                            <option key={sem._id} value={sem._id}>
-                              {sem.name}
+                        <option>----SELECT SUBJECT----</option>
+                        {allsubjects &&
+                          allsubjects.map((subject) => (
+                            <option key={subject._id} value={subject._id}>
+                              {subject.name}
                             </option>
                           ))}
                       </select>
                     </FormGroup>
-
                     <FormGroup>
                       <Input
                         autoFocus
                         type='text'
-                        name='name'
-                        value={name}
-                        placeholder='Name'
-                        onChange={onChange}
-                        required
-                      />
-                    </FormGroup>
-
-                    <FormGroup>
-                      <Input
-                        autoFocus
-                        type='text'
-                        name='code'
-                        value={code}
-                        placeholder='Branch Code'
+                        name='desc'
+                        value={desc}
+                        placeholder='Description'
                         onChange={onChange}
                         required
                       />
                     </FormGroup>
 
                     <Button block type='submit' className='btn-success mt-5'>
-                      ADD SUBJECT
+                      ASSIGN SUBJECT
                     </Button>
                   </form>
                 </CardBody>
@@ -180,4 +166,4 @@ const AddSubject = (props) => {
     );
   }
 };
-export default AddSubject;
+export default AssignSubject;

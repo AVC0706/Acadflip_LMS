@@ -69,7 +69,7 @@ const DashboardPage = () => {
                     <br />
                     <br />
                     <span className='right'>
-                      <Link to='/' className='p-2'>
+                      <Link to='/principaladdSubject' className='p-2'>
                         <Button color='primary'>ADD SUBJECT</Button>{" "}
                       </Link>
                     </span>
@@ -80,14 +80,50 @@ const DashboardPage = () => {
                 <Card className='d-flex mb-5 p-5'>
                   <CardBody>
                     <CardTitle className='font-bold mb-3'>
-                      <strong>Grade Student Papers</strong>
+                      <strong>ADD Teacher</strong>
                     </CardTitle>
                     <CardText></CardText>
                     <br />
                     <br />
                     <span className='right'>
-                      <Link to='/' className='p-2'>
-                        <Button color='primary'>GRADE PAPERS</Button>{" "}
+                      <Link to='/principaladdTeacher' className='p-2'>
+                        <Button color='primary'>ADD TEACHER</Button>{" "}
+                      </Link>
+                    </span>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <Row className='d-flex justify-content-center'>
+              <Col lg='6' xl='5' className='mb-3'>
+                <Card className='d-flex mb-5 p-5'>
+                  <CardBody>
+                    <CardTitle className='font-bold mb-3'>
+                      <strong>ADD Student</strong>
+                    </CardTitle>
+                    <CardText></CardText>
+                    <br />
+                    <br />
+                    <span className='right'>
+                      <Link to='/principalstudentUpload' className='p-2'>
+                        <Button color='primary'>ADD STUDENT</Button>{" "}
+                      </Link>
+                    </span>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col lg='6' xl='5' className='mb-3'>
+                <Card className='d-flex mb-5 p-5'>
+                  <CardBody>
+                    <CardTitle className='font-bold mb-3'>
+                      <strong>ASSIGN Subject</strong>
+                    </CardTitle>
+                    <CardText></CardText>
+                    <br />
+                    <br />
+                    <span className='right'>
+                      <Link to='/principalassignSubject' className='p-2'>
+                        <Button color='primary'>ASSIGN SUBJECT</Button>{" "}
                       </Link>
                     </span>
                   </CardBody>

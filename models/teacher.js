@@ -17,25 +17,25 @@ const TeacherSchema = mongoose.Schema(
     email: {
       type: String,
       unique: true,
-      required: true,
+      // required: true,
       trim: true,
       lowercase: true,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error("enter a proper email");
-        }
-      },
+      // validate(value) {
+      //   if (!validator.isEmail(value)) {
+      //     throw new Error("enter a proper email");
+      //   }
+      // },
     },
     password: {
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
-      validate(value) {
-        if (value.toLowerCase().includes("password")) {
-          throw new Error("password can't be passowrd");
-        }
-      },
+      // minlength: 8,
+      // validate(value) {
+      //   if (value.toLowerCase().includes("password")) {
+      //     throw new Error("password can't be passowrd");
+      //   }
+      // },
     },
     branch_id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -58,7 +58,7 @@ TeacherSchema.pre("save", async function (next) {
   const teacher = this;
 
   if (teacher.isModified("password")) {
-    teacher.password = await bcrypt.hash(user.password, 8);
+    teacher.password = await bcrypt.hash(teacher.password, 8);
   }
 
   next();
