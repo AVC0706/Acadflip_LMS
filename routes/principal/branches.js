@@ -35,7 +35,7 @@ router.post("/addBranch", [isPrincipal], async (req, res) => {
   }
 });
 
-//-----------Add Branch---------------
+//-----------Get All Branch---------------
 router.get("/getAllBranch", [isPrincipal], async (req, res) => {
   //start
   console.log("get All brnahces");

@@ -22,27 +22,29 @@ const AddSubject = (props) => {
   const {
     error,
     allbranches,
+    allsemesters,
     clearError,
     user,
     getAllBranches,
+    getAllSemester,
   } = principalContext;
   const [subject, setSubject] = useState({
     name: "",
     code: "",
+    branch_id: "",
+    semester_id: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [sems, setSems] = useState([]);
 
-  const { name, code } = subject;
+  const { name, code, branch_id, semester_id } = subject;
 
   useEffect(() => {
     getAllBranches();
     console.log(allbranches);
-    axios.get("/api/principal/getSemester").then((result) => {
-      setSems(result.data.sems);
-      console.log(sems);
-    });
+    getAllSemester();
+    console.log(allsemesters);
 
     clearError();
     // eslint-disable-next-line
@@ -53,6 +55,7 @@ const AddSubject = (props) => {
       ...subject,
       [e.target.name]: e.target.value,
     });
+    console.log(subject);
   };
 
   const onSubmit = async (e) => {
@@ -63,14 +66,21 @@ const AddSubject = (props) => {
       const formData = new FormData();
       formData.append("name", name);
       formData.append("code", code);
+      formData.append("branch_id", branch_id);
+      formData.append("semester_id", semester_id);
 
-      const res = await axios.post("/api/principal/addSemester", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        "/api/principalSubject/addSubject",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      alert("Semester Uploaded");
+      alert("Subject Uploaded");
+      setLoading(false);
     } catch (err) {
       alert(err.response.data.msg);
     }
@@ -100,15 +110,39 @@ const AddSubject = (props) => {
                     <br />
 
                     <FormGroup>
-                      <Input
-                        autoFocus
-                        type='text'
-                        name='name'
-                        value={name}
-                        placeholder='Name'
+                      <select
+                        value={branch_id}
+                        type='select'
+                        name='branch_id'
                         onChange={onChange}
                         required
-                      />
+                      >
+                        <option>----SELECT BRANCH----</option>
+                        {allbranches &&
+                          allbranches.map((branch) => (
+                            <option key={branch._id} value={branch._id}>
+                              {branch.name}
+                            </option>
+                          ))}
+                      </select>
+                    </FormGroup>
+
+                    <FormGroup>
+                      <select
+                        value={semester_id}
+                        type='select'
+                        name='semester_id'
+                        onChange={onChange}
+                        required
+                      >
+                        <option>----SELECT SEMESTER----</option>
+                        {allsemesters &&
+                          allsemesters.map((sem) => (
+                            <option key={sem._id} value={sem._id}>
+                              {sem.name}
+                            </option>
+                          ))}
+                      </select>
                     </FormGroup>
 
                     <FormGroup>
@@ -136,7 +170,7 @@ const AddSubject = (props) => {
                     </FormGroup>
 
                     <Button block type='submit' className='btn-success mt-5'>
-                      ADD Semester
+                      ADD SUBJECT
                     </Button>
                   </form>
                 </CardBody>

@@ -13,6 +13,7 @@ import {
   CLEAR_ERRORS,
   ADDBRANCH_SUCCESS,
   GETALLBRANCH_SUCCESS,
+  GETALLSEMESTER_SUCCESS,
   BRANCH_FAIL,
 } from "../types";
 import setAuthToken from "../../utils/setAuthToken";
@@ -26,6 +27,8 @@ const PrincipalState = (props) => {
     error: null,
     isPrincipal: false,
     allbranches: [],
+    allsemesters: [],
+
     msg: "",
   };
 
@@ -110,7 +113,7 @@ const PrincipalState = (props) => {
   };
 
   //-----------Get All branches---------------
-  const getAllBranches = async (f) => {
+  const getAllBranches = async () => {
     try {
       const res = await axios.get("/api/principalBranch/getAllBranch");
 
@@ -119,6 +122,24 @@ const PrincipalState = (props) => {
         payload: res.data,
       });
       console.log(state.allbranches);
+    } catch (e) {
+      dispatch({
+        type: BRANCH_FAIL,
+        payload: e.response.data.msg,
+      });
+    }
+  };
+
+  //-----------Get All SEMESTERS---------------
+  const getAllSemester = async () => {
+    try {
+      const res = await axios.get("/api/principal/getSemester");
+
+      dispatch({
+        type: GETALLSEMESTER_SUCCESS,
+        payload: res.data,
+      });
+      console.log(state.allsemesters);
     } catch (e) {
       dispatch({
         type: BRANCH_FAIL,
@@ -144,12 +165,14 @@ const PrincipalState = (props) => {
         isPrincipal: state.isPrincipal,
         error: state.error,
         allbranches: state.allbranches,
+        allsemesters: state.allsemesters,
         login,
         loadUser,
         logout,
         clearError,
         addBranch,
         getAllBranches,
+        getAllSemester,
       }}
     >
       {/* <ContextDevTool

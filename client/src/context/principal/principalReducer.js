@@ -10,6 +10,7 @@ import {
   ADDBRANCH_SUCCESS,
   BRANCH_FAIL,
   GETALLBRANCH_SUCCESS,
+  GETALLSEMESTER_SUCCESS,
 } from "../types";
 
 export default (state, action) => {
@@ -73,6 +74,16 @@ export default (state, action) => {
         allbranches: action.payload,
         error: null,
       };
+
+    case GETALLSEMESTER_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+
+        allsemesters: action.payload.sems,
+        error: null,
+      };
+
     case BRANCH_FAIL:
       return {
         ...state,
