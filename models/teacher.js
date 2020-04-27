@@ -17,7 +17,7 @@ const TeacherSchema = mongoose.Schema(
     email: {
       type: String,
       unique: true,
-      // required: true,
+      required: true,
       trim: true,
       lowercase: true,
       // validate(value) {
@@ -37,9 +37,15 @@ const TeacherSchema = mongoose.Schema(
       //   }
       // },
     },
+    tokens: [{
+      token: {
+          required: true,
+          type: String
+      }
+  }],
     branch_id: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      // required: true,
       ref: "Branch",
     },
   },
@@ -48,11 +54,6 @@ const TeacherSchema = mongoose.Schema(
   }
 );
 
-TeacherSchema.virtual("teacherAssign", {
-  ref: "TeacherAssign",
-  localField: "_id",
-  foreignField: "teacher_id",
-});
 
 TeacherSchema.pre("save", async function (next) {
   const teacher = this;
@@ -69,9 +70,35 @@ TeacherSchema.methods.toJSON = function () {
   const teacherObject = teacher.toObject();
 
   delete teacherObject.password;
+  delete teacherObject.tokens
 
   return teacherObject;
 };
+
+TeacherSchema.statics.findByCredentials = async (email,password) => {
+  const user = await User.findOne({ email })
+  if(!user) {
+      throw new Error('Invalid user')
+  }
+  const isMatch = await bcrypt.compare(password, user.password)
+
+  if(!isMatch) {
+      throw new Error('invalid login password')
+  }
+
+  return user
+}
+
+
+TeacherSchema.methods.generateAuthToken = async function () {
+  const user = this
+  const token = await jwt.sign({_id:user._id.toString()} , "loveyou3000")
+
+  user.tokens = user.tokens.concat({token})
+  await user.save()
+
+  return token 
+} 
 
 const Teacher = mongoose.model("Teacher", TeacherSchema);
 

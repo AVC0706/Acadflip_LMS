@@ -40,11 +40,6 @@ const SubjectScehma = mongoose.Schema(
   }
 );
 
-SubjectScehma.virtual("teacherAssign", {
-  ref: "TeacherAssign",
-  localField: "_id",
-  foreignField: "subject_id",
-});
 
 const Subject = mongoose.model("Subject", SubjectScehma);
 

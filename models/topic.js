@@ -17,17 +17,16 @@ const TopicSchema = mongoose.Schema({
     },
     is_active: {
         type: Boolean,
-        required: true
+        // required: true
     },
+    unit_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    }
 },{
     timestamps: true
 })
 
-TopicSchema.virtual('teacher', {
-    ref: 'Teacher',
-    localField: '_id',
-    foreignField: 'topic_id'
-})
 
 
 const Topic = mongoose.model('Topic', TopicSchema)

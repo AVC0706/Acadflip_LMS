@@ -24,12 +24,14 @@ app.use("/api/principal", require("./routes/principal/principal"));
 app.use("/api/principalBranch", require("./routes/principal/branches"));
 app.use("/api/principalSubject", require("./routes/principal/subject"));
 app.use("/api/principalStudent", require("./routes/principal/student"));
-app.use("/api/principalTeacher", require("./routes/principal/teacher"));
+//------------Both teacher and principle access---------------
+app.use("/api/teacher", require("./routes/principal/teacher"));
 
 //-------Super admin-----------
 app.use("/api/admin", require("./routes/superAdmin/register"));
 app.use("/api/auth", require("./routes/superAdmin/auth"));
 app.use("/api/institute", require("./routes/superAdmin/registerInstitute"));
+
 
 // Serve static assets in production
 // if (process.env.NODE_ENV === "production") {
