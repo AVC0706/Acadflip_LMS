@@ -5,6 +5,23 @@ const fs = require("fs");
 const fastcsv = require("fast-csv");
 const isPrincipal = require("../../middleware/Principal/isPrincipal");
 
+//-----------Get All Student---------------
+router.get("/getAllStudent", [isPrincipal], async (req, res) => {
+  //start
+  console.log("get All Students");
+
+  try {
+    let student = await Student.find({ institute_id: req.user.institute_id });
+
+    res.json(student);
+
+    //end
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Server Error");
+  }
+});
+
 //-------------Upload Student Bulk-------------
 router.post("/studentUpload", isPrincipal, (req, res) => {
   //start
@@ -79,6 +96,24 @@ router.post("/studentUpload", isPrincipal, (req, res) => {
   });
 
   //end
+});
+
+//-----------Delete Student---------------
+router.delete("/deleteStudent/:id", [isPrincipal], async (req, res) => {
+  //start
+  console.log(req.params.id, req.user.institute_id);
+  try {
+    let student = await Student.findOneAndDelete({
+      institute_id: req.user.institute_id,
+      _id: req.params.id,
+    });
+    res.json({ msg: "Student Delete", student });
+
+    //end
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Server Error");
+  }
 });
 
 //end

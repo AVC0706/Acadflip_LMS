@@ -32,6 +32,9 @@ const TopNavigation = () => {
           >
             <ListGroupItem>Dashboard</ListGroupItem>
           </NavLink>
+          <NavLink to='/principalStudents' activeClassName='activeClass'>
+            <ListGroupItem>View Students</ListGroupItem>
+          </NavLink>
           <NavLink to='/principalprofile' activeClassName='activeClass'>
             <ListGroupItem>Profile</ListGroupItem>
           </NavLink>
