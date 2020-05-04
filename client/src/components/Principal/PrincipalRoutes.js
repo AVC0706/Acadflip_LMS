@@ -9,6 +9,7 @@ import AddSemester from "./Uploads/AddSemester";
 import AddSubject from "./Uploads/AddSubject";
 import AddTeacher from "./Uploads/AddTeacher";
 import AssignSubject from "./Uploads/AssignSubject";
+import ViewStudent from "./View/viewStudents";
 
 class PrincipalRoutes extends React.Component {
   render() {
@@ -24,6 +25,7 @@ class PrincipalRoutes extends React.Component {
           <Route path='/principalstudentUpload' component={AddStudents} />
           <Route path='/principaladdTeacher' component={AddTeacher} />
           <Route path='/principalassignSubject' component={AssignSubject} />
+          <Route path='/principalStudents' component={ViewStudent} />
         </Switch>
       </div>
     );

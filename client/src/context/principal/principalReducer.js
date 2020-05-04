@@ -13,6 +13,7 @@ import {
   GETALLSEMESTER_SUCCESS,
   GETALLSUBJECT_SUCCESS,
   GETALLTEACHER_SUCCESS,
+  GET_ALLSTUDENTS,
 } from "../types";
 
 export default (state, action) => {
@@ -100,6 +101,15 @@ export default (state, action) => {
         ...state,
 
         allteachers: action.payload,
+        error: null,
+      };
+
+    case GET_ALLSTUDENTS:
+      console.log(action.payload);
+      return {
+        ...state,
+
+        allStudents: action.payload,
         error: null,
       };
 

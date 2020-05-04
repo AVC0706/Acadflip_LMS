@@ -16,6 +16,8 @@ import {
   GETALLSEMESTER_SUCCESS,
   GETALLSUBJECT_SUCCESS,
   GETALLTEACHER_SUCCESS,
+  GET_ALLSTUDENTS,
+  STUDENT_ERROR,
   BRANCH_FAIL,
 } from "../types";
 import setAuthToken from "../../utils/setAuthToken";
@@ -32,6 +34,7 @@ const PrincipalState = (props) => {
     allsemesters: [],
     allsubjects: [],
     allteachers: [],
+    allStudents: [],
     msg: "",
   };
 
@@ -187,6 +190,22 @@ const PrincipalState = (props) => {
     }
   };
 
+  const getAllStudent = async () => {
+    try {
+      const res = await axios.get("/api/principalStudent/getAllStudent");
+
+      dispatch({
+        type: GET_ALLSTUDENTS,
+        payload: res.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: BRANCH_FAIL,
+        payload: e.response.data.msg,
+      });
+    }
+  };
+
   //Clear Error
   const clearError = () => {
     dispatch({
@@ -207,6 +226,7 @@ const PrincipalState = (props) => {
         allsemesters: state.allsemesters,
         allsubjects: state.allsubjects,
         allteachers: state.allteachers,
+        allStudents: state.allStudents,
         login,
         loadUser,
         logout,
@@ -216,6 +236,7 @@ const PrincipalState = (props) => {
         getAllSemester,
         getAllSubject,
         getAllTeacher,
+        getAllStudent,
       }}
     >
       {/* <ContextDevTool
