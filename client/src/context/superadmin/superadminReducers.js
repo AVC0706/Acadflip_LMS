@@ -8,6 +8,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   INSTITUTE_SUCCESS,
+  GET_ALLINSTITUTE,
+  UPDATE_INSTITUTE_SUCCESS,
 } from "../types";
 
 export default (state, action) => {
@@ -62,7 +64,6 @@ export default (state, action) => {
         ...state,
         ...action.payload,
         loading: false,
-        isAuth: true,
       };
     case REGISTER_FAIL:
       return {
@@ -86,6 +87,18 @@ export default (state, action) => {
         ...state,
         // ...action.payload,
         isInst: true,
+      };
+
+    case GET_ALLINSTITUTE:
+      return {
+        ...state,
+        allInstitutes: action.payload,
+      };
+
+    case UPDATE_INSTITUTE_SUCCESS:
+      return {
+        ...state,
+        inst: action.payload,
       };
 
     case CLEAR_ERRORS:

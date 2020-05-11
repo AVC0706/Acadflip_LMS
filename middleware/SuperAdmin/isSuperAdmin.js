@@ -3,7 +3,6 @@ const config = require("config");
 const SuperAdmin = require("../../models/Superadmin");
 
 const isSuperAdmin = async (req, res, next) => {
-  console.log("admin");
   const token = req.header("x-auth-token");
 
   if (!token) {

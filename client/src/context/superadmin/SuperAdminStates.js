@@ -13,6 +13,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   INSTITUTE_SUCCESS,
+  GET_ALLINSTITUTE,
+  UPDATE_INSTITUTE_SUCCESS,
 } from "../types";
 import setAuthToken from "../../utils/setAuthToken";
 // import ContextDevTool from "react-context-devtool";
@@ -27,6 +29,8 @@ const SuperAdminState = (props) => {
     isAdmin: false,
     msg: "",
     isInst: null,
+    allInstitutes: null,
+    inst: null,
   };
 
   const [state, dispatch] = useReducer(SuperAdminReducer, initialState);
@@ -40,7 +44,7 @@ const SuperAdminState = (props) => {
 
     try {
       const res = await axios.get("/api/auth/superAdmin");
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -159,6 +163,48 @@ const SuperAdminState = (props) => {
     }
   };
 
+  //Display Institute
+  const getAllInstitutes = async () => {
+    try {
+      const res = await axios.get("/api/Institute/getAllInstitutes");
+      dispatch({
+        type: GET_ALLINSTITUTE,
+        payload: res.data,
+      });
+    } catch (e) {
+      console.log("Institute display fail");
+    }
+  };
+
+  //Update institute
+  const update = async (formData) => {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "/api/institute/updateInstitute",
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_INSTITUTE_SUCCESS,
+        payload: res.data,
+      });
+      console.log("institute successfully added");
+    } catch (e) {
+      // dispatch({
+      //   type: REGISTER_FAIL,
+      //   payload: e.response.data.msg,
+      // });
+      console.log("Institute adding fail");
+    }
+  };
+
   //Clear Error
   const clearError = () => {
     dispatch({
@@ -176,12 +222,16 @@ const SuperAdminState = (props) => {
         isAdmin: state.isAdmin,
         error: state.error,
         isInst: state.isInst,
+        allInstitutes: state.allInstitutes,
+        inst: state.inst,
         register,
         login,
         loadUser,
         logout,
         clearError,
         add,
+        getAllInstitutes,
+        update,
       }}
     >
       {/* <ContextDevTool

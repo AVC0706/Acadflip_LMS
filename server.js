@@ -30,8 +30,7 @@ app.use("/api/teacher", require("./routes/principal/teacher"));
 //-------Super admin-----------
 app.use("/api/admin", require("./routes/superAdmin/register"));
 app.use("/api/auth", require("./routes/superAdmin/auth"));
-app.use("/api/institute", require("./routes/superAdmin/registerInstitute"));
-
+app.use("/api/institute", require("./routes/superAdmin/Institute"));
 
 // Serve static assets in production
 // if (process.env.NODE_ENV === "production") {

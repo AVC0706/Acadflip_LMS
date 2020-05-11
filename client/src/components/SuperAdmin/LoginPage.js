@@ -36,12 +36,6 @@ const LoginPage = (props) => {
         // alert("LOGGED IN");
         setLoading(false);
         props.history.push("/superAdmindashboard");
-      } else {
-        console.log("non");
-
-        alert("LOGGED IN");
-        setLoading(false);
-        props.history.push("/profile");
       }
     } else {
     }
@@ -100,7 +94,7 @@ const LoginPage = (props) => {
                 <CardBody>
                   <form onSubmit={onSubmit}>
                     <h2>
-                      <b>Member Login</b>
+                      <b>Super Admin Login</b>
                     </h2>
                     <br />
                     <FormGroup>

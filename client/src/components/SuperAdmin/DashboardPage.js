@@ -18,13 +18,9 @@ import SideNavigation from "./sideNavigation";
 const DashboardPage = (props) => {
   const superadminContext = useContext(SuperAdminContext);
 
-  const { isAuth, error, loadUser, token, clearError } = superadminContext;
+  const { isAuth } = superadminContext;
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      loadUser();
-    }
-
     if (isAuth === false || isAuth === null) {
       props.history.push("/superAdminlogin");
     }
@@ -60,14 +56,14 @@ const DashboardPage = (props) => {
                 <Card className="d-flex mb-5 p-5">
                   <CardBody>
                     <CardTitle className="font-bold mb-3">
-                      <strong>Update Details </strong>
+                      <strong>View/Update Details </strong>
                     </CardTitle>
                     <CardText></CardText>
                     <br />
                     <br />
                     <span className="right">
-                      <Link to="/" className="p-2">
-                        <Button color="primary">UPDATE INSTITUTE</Button>{" "}
+                      <Link to="/superAdminView" className="p-2">
+                        <Button color="primary">VIEW/UPDATE INSTITUTE</Button>{" "}
                       </Link>
                     </span>
                   </CardBody>

@@ -15,7 +15,7 @@ import SideNavigation from "./sideNavigation";
 const AddInstitute = (props) => {
   const superadminContext = useContext(SuperAdminContext);
 
-  const { error, add, clearError, isInst } = superadminContext;
+  const { error, add, clearError, isAuth, isInst } = superadminContext;
   const [user, setuser] = useState({
     name: "",
     iuser: "",
@@ -39,6 +39,9 @@ const AddInstitute = (props) => {
       setLoading(false);
       alert(error);
       props.history.push("/superAdminRegister");
+    }
+    if (isAuth === false || isAuth === null) {
+      props.history.push("/superAdminlogin");
     }
 
     clearError();

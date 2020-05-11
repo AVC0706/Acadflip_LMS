@@ -5,24 +5,16 @@ import SuperAdminContext from "../../context/superadmin/superadminContext";
 
 const TopNavigation = () => {
   const superadminContext = useContext(SuperAdminContext);
-  const { isAuth, logout, user, loadUser, loading } = superadminContext;
+  const { isAuth, logout } = superadminContext;
 
-  useEffect(() => {
-    // if (localStorage.getItem("token")) {
-    //   // loadUser();
-    // }
-    // //console.log(isAdmin);
-    // // eslint-disable-next-line
-    // // clearErrors();
-    if (isAuth) console.log("sidenav is auth");
-  }, [loading]);
+  useEffect(() => {}, []);
 
   const onLogout = () => {
     logout();
     // clearContacts();
   };
 
-  if (isAuth) {
+  if (isAuth != null) {
     return (
       <Fragment>
         <div className="sidebar-fixed position-fixed">
