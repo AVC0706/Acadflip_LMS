@@ -1,8 +1,7 @@
 import React, { useReducer } from "react";
 import axios from "axios";
 import PrincipalContext from "./principalContext";
-import PrincipalReducer from "./principalReducer";
-
+import PrincipalReducer from "./principalReducer"
 import {
   REGISTER_FAIL,
   USER_LOADED,

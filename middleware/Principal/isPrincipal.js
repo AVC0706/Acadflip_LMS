@@ -3,7 +3,7 @@ const config = require("config");
 const Principal = require("../../models/Principal");
 
 const isPrincipal = async (req, res, next) => {
-  console.log("Principal");
+  // console.log("Principal");
   const token = req.header("x-auth-token");
 
   if (!token) {

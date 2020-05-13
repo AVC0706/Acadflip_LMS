@@ -20,12 +20,14 @@ const PLoginPage = (props) => {
   const principalContext = useContext(PrincipalContext);
 
   const { isAuth, error, login, isPrincipal, clearError } = principalContext;
+  console.log(isPrincipal)
   const [user, setuser] = useState({
     email: "",
     password: "",
   });
 
   const [loading, setLoading] = useState(false);
+  console.log(`${user} is present`)
 
   const { email, password } = user;
 
@@ -38,7 +40,6 @@ const PLoginPage = (props) => {
         props.history.push("/principaldashboard");
       }
     } else {
-      console.log("non");
 
       setLoading(false);
       props.history.push("/principallogin");
@@ -66,7 +67,7 @@ const PLoginPage = (props) => {
     setLoading(true);
     console.log("working");
     if (email === "" || password === "") {
-      // setAlert("Please enter all fields", "danger");
+  
     } else {
       login({
         email,

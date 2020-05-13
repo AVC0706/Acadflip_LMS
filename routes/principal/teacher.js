@@ -83,73 +83,112 @@ router.post("/assignSubject", [isPrincipal], async (req, res) => {
   }
 });
 
-router.post("/login", async (req,res) => {
+// router.post("/login", async (req,res) => {
 
-  try {
-      const user = await Teacher.findByCredentials(req.body.email,req.body.password)
-      const token = await user.generateAuthToken()
+//   try {
+//       const user = await Teacher.findByCredentials(req.body.email,req.body.password)
+//       const token = await user.generateAuthToken()
 
-      res.json({user,token})
+//       res.json({user,token})
 
-  } catch(e) {
-      res.status(400).send(e)
-  }
-})
+//   } catch(e) {
+//       res.status(400).send(e)
+//   }
+// })
 
-router.get('/particularAssignedSub', [teacherAuth], async (req,res) => {
-  console.log("all assigned subjects of teacher" + req.user.teacher_id)
-  try {
-    let sub = await TeacherAssign.find({institute_id: req.user.institute_id, teacher_id: req.user.teacher_id})
+// router.get('/particularAssignedSub', [teacherAuth], async (req,res) => {
+//   console.log("all assigned subjects of teacher" + req.user.teacher_id)
+//   try {
+//     let sub = await TeacherAssign.find({institute_id: req.user.institute_id, teacher_id: req.user.teacher_id})
 
-    console.log("subject seen!")
+//     console.log("subject seen!")
 
-    res.json(sub)
+//     res.json(sub)
 
-  } catch(e) {
-    console.log(e)
-    res.status(500).send(e)
-  }
-})
+//   } catch(e) {
+//     console.log(e)
+//     res.status(500).send(e)
+//   }
+// })
 
-router.post('/createUnit', [teacherAuth],async (req,res)=> {
-  console.log('process started for creating topic');
-  const {unit_no, name,description,subject_id} = req.body
-  try { 
-    let unit = Unit.find({unit_no})
-    if(unit) {
-      res.status(400).send()
-    }
+// router.post('/createUnit', [teacherAuth],async (req,res)=> {
+//   console.log('process started for creating topic');
+//   const {unit_no, name,description,subject_id} = req.body
+//   try { 
+//     let unit = Unit.find({unit_no})
+//     if(unit) {
+//       res.status(400).send()
+//     }
 
-    const newUnit = new Unit({
-      unit_no,
-      name,
-      description,
-      subject_id,
-      institute_id: req.user.institute_id
-    })
+//     const newUnit = new Unit({
+//       unit_no,
+//       name,
+//       description,
+//       subject_id,
+//       institute_id: req.user.institute_id
+//     })
 
-   await newUnit.save()
-   res.json({msg:'teacher added successfully', newUnit})
+//    await newUnit.save()
+//    res.json({msg:'teacher added successfully', newUnit})
 
-  } catch(e) {
-    console.log(e.message)
-    res.status(500).send(e.message)
-  }
-})
+//   } catch(e) {
+//     console.log(e.message)
+//     res.status(500).send(e.message)
+//   }
+// })
 
-router.get('/getUnit',[teacherAuth], async (req,res)=> {
-  try {
-  const unit = await Unit.find({institute_id: req.user.institute_id,subject_id:req.user.institute_id})
-  if(!unit) {
-    throw new Error('unit is not present first create the units')
-  } 
+// router.get('/getUnit',[teacherAuth], async (req,res)=> {
+//   try {
+//   const unit = await Unit.find({institute_id: req.user.institute_id,})
+//   if(!unit) {
+//     throw new Error('unit is not present first create the units')
+//   } 
 
-  res.send(unit)
-} catch(e) {
-  res.status(500).send(e)
-}
-})
+//   res.send(unit)
+// } catch(e) {
+//   res.status(500).send(e)
+// }
+// })
 
+// router.post('/createTopic', [teacherAuth], async (req,res)=> {
+//   const {name,description,unit,is_active} = req.body
+
+//   try {
+//     const unit_object = await Unit.find({name: unit})
+//     console.log(unit_object)
+//     if(!unit_object) {
+//       throw new Error('create unit first')
+//     }
+
+//     const newTopic = new Topic({
+//       name,
+//       description,
+//       unit_id: unit_object._id,
+//       teacher_id: req.user._id,
+//       institute_id: req.user.institute_id,
+//       is_active
+//     })
+
+//     await newTopic.save()
+//     res.status(201).send(newTopic)
+//   } catch(e) {
+//     console,llog(e.message)
+//     res.status(500).send(e.message)
+//   }
+// })
+
+// router.get('/getTopic',[teacherAuth], async(req,res)=> {
+//   try {
+//     const topic = await Topic.find({unit_id,teacher_id: req.user._id,institute_id: req.user.institute_id})
+//     if(!topic) {
+//       res.status(400).send('no topic presented')
+//     }
+//     console.log(topic)
+//     res.send(topic)
+//   } catch(e) {
+//     res.status(500).send(e)
+//   }
+// })
 
 //end
 module.exports = router;

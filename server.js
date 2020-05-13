@@ -24,9 +24,10 @@ app.use("/api/principal", require("./routes/principal/principal"));
 app.use("/api/principalBranch", require("./routes/principal/branches"));
 app.use("/api/principalSubject", require("./routes/principal/subject"));
 app.use("/api/principalStudent", require("./routes/principal/student"));
-//------------Both teacher and principle access---------------
-app.use("/api/teacher", require("./routes/principal/teacher"));
+app.use("/api/principalTeacher", require("./routes/principal/teacher"));
 
+//-----------teacher--------------------
+app.use("/api/teacher",require('./routes/teacher/teacher'))
 //-------Super admin-----------
 app.use("/api/admin", require("./routes/superAdmin/register"));
 app.use("/api/auth", require("./routes/superAdmin/auth"));

@@ -12,7 +12,7 @@ const teacherAuth = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, config.get("jwtSecret"));
-    const user = await Teacher.findById(decoded.principal._id);
+    const user = await Teacher.findById(decoded.id);
 
     if (!user) {
       res.status(401).json({ msg: "Sorry User Error" });

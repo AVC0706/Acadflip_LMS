@@ -22,6 +22,10 @@ const TopicSchema = mongoose.Schema({
     unit_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
+    },
+    institute_id :{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 },{
     timestamps: true
