@@ -7,6 +7,10 @@ const UnitSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    teacher_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     unit_no: {
         type: Number,
         required: true

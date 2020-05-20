@@ -8,6 +8,7 @@ const teacherAuth = require('../../middleware/Teacher/teacher')
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
 const config = require("config");
+const Subject = require("../../models/subject");
 
 
 router.post("/login", async (req,res) => {
@@ -37,6 +38,7 @@ router.post("/login", async (req,res) => {
         }
 
         console.log("teacher logged in")
+        console.log(token)
         res.json({token,teacher})
       })
     } catch(e) {
@@ -51,12 +53,11 @@ router.post("/login", async (req,res) => {
   });
   
   router.get('/particularAssignedSub', [teacherAuth], async (req,res) => {
-    console.log("all assigned subjects of teacher" + req.user.teacher_id)
+    console.log(req.user)
+    console.log("all assigned subjects of teacher " + req.user._id)
     try {
-      let sub = await TeacherAssign.find({institute_id: req.user.institute_id, teacher_id: req.user.teacher_id})
-  
+      const sub = await TeacherAssign.find({ teacher_id: req.user._id})
       console.log("subject seen!")
-  
       res.json(sub)
   
     } catch(e) {
@@ -117,8 +118,8 @@ router.post("/login", async (req,res) => {
       const newTopic = new Topic({
         name,
         description,
-        unit_id: unit_object._id,
-        teacher_id: req.user.id,
+        unit_id,
+        teacher_id: req.user._id,
         institute_id: req.user.institute_id,
         is_active
       })
@@ -144,4 +145,14 @@ router.post("/login", async (req,res) => {
     }
   })
 
+  router.patch('/')
+
   module.exports = router
+
+
+
+
+
+
+
+//utkarsh atre....~!

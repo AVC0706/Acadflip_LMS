@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+// const teacherAuth = require('../../middleware/Teacher/teacher')
 
 const Subject = require("../../models/subject");
 const isPrincipal = require("../../middleware/Principal/isPrincipal");
@@ -36,6 +37,7 @@ router.post("/addSubject", [isPrincipal], async (req, res) => {
 
 //-----------Get All Subject---------------
 router.get("/getAllSubject", [isPrincipal], async (req, res) => {
+  console.log(req.user)
   //start
   console.log("get All subject");
 

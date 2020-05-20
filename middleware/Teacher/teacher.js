@@ -7,12 +7,13 @@ const teacherAuth = async (req, res, next) => {
   const token = req.header("x-auth-token");
 
   if (!token) {
-    return res.status(401).json({ msg: "No Token" });
+    console.log("no token")
+    return res.status(401).json({ msg: "No Token" });   
   }
 
   try {
-    const decoded = jwt.verify(token, config.get("jwtSecret"));
-    const user = await Teacher.findById(decoded.id);
+    const decoded =  jwt.verify(token, config.get("jwtSecret"));
+    const user = await Teacher.findById(decoded.teacher.id);
 
     if (!user) {
       res.status(401).json({ msg: "Sorry User Error" });
@@ -23,7 +24,7 @@ const teacherAuth = async (req, res, next) => {
 
     next();
 
-    //end
+
   } catch (e) {
     res.status(401).json({ msg: "Please authenticate" });
   }

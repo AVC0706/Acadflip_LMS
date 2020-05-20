@@ -12,7 +12,7 @@ import {
   } from "reactstrap";
   import src1 from "../../assets/login.svg";
 import TeacherContext from '../../context/teacher/teacherContex'
-import TeacherState from '../../context/teacher/teacherState';
+
 
 const Tlogin = (props) => {
     const teacherContext = useContext(TeacherContext);
@@ -22,7 +22,6 @@ const Tlogin = (props) => {
         password: "",
     });
     const [loading,setLoading] = useState(false);
-    console.log(`${user} is present`)
     const {email,password} = user;
 
     useEffect(()=> {
@@ -48,7 +47,7 @@ const Tlogin = (props) => {
       console.log(user)
         setUser({
             ...user,
-            [e.target.name] : e.target.name
+            [e.target.name] : e.target.value
         })
     }
 

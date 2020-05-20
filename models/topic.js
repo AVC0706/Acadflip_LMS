@@ -9,7 +9,7 @@ const TopicSchema = mongoose.Schema({
     },
     description: {
         type: String,
-        required:true
+        // required:true
     },
     teacher_id : {
         type: mongoose.Schema.Types.ObjectId,

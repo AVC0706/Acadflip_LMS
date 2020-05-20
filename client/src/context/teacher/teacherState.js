@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react'
 import axios from "axios";
 import teacherContex from "./teacherContex";
-import TeacherReducer from './teacherReducer'
+import teacherReducer from './teacherReducer'
 
 import { USER_LOADED,
          AUTH_ERROR,
@@ -30,7 +30,7 @@ const TeacherState = (props) => {
         alltopic:[],
         msg: '',
     }
-    const [state, dispatch] = useReducer(TeacherReducer, initialState);
+    const [state, dispatch] = useReducer(teacherReducer, initialState);
     const loadUser = async ()=> {
         if(localStorage.getItem("token")) {
             setAuthToken(localStorage.getItem("token"))
@@ -57,12 +57,13 @@ const TeacherState = (props) => {
             }
         }
         try {
-            console.log(formData)
             const res = await axios.post("/api/teacher/login", formData,config)
+  
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data                
             })
+            console.log(res.data.token)
         } catch(e) {
             dispatch({
                 type: LOGIN_FAIL,
@@ -104,7 +105,7 @@ const TeacherState = (props) => {
         } catch(e) {
             dispatch({
                 type: BRANCH_FAIL,
-                payload: e.response.data.msg
+                payload: "error message"
             })
         }
     }

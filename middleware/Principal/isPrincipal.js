@@ -15,6 +15,7 @@ const isPrincipal = async (req, res, next) => {
     const user = await Principal.findById(decoded.principal.id);
 
     if (!user) {
+      console.log("asaasas")
       res.status(401).json({ msg: "Sorry User Error" });
     }
 
